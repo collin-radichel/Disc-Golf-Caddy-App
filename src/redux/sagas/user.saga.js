@@ -24,8 +24,18 @@ function* fetchUser() {
   }
 }
 
+function* updateProfilePic(action) {
+  try {
+    console.log('action.payload:', action.payload)
+    // yield axios.put(`/api/user/profilePic`, {image : action.payload})
+  } catch (error) {
+    console.log('updateProfilePic saga failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest("UPDATE_PROFILE_PIC", updateProfilePic)
 }
 
 export default userSaga;
