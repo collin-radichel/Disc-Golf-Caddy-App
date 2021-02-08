@@ -27,7 +27,7 @@ function* fetchUser() {
 function* updateProfilePic(action) {
   try {
     console.log('action.payload:', action.payload)
-    // yield axios.put(`/api/user/profilePic`, {image : action.payload})
+    yield axios.put(`/api/user/profilePic/${action.payload.id}`, {image : action.payload.url})
   } catch (error) {
     console.log('updateProfilePic saga failed', error);
   }

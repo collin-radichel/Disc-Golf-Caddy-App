@@ -1,8 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const aws = require( 'aws-sdk' );
+const multerS3 = require( 'multer-s3' );
+const multer = require('multer');
+const path = require( 'path' );
+
 require('dotenv').config();
 
 const app = express();
+
+var s3 = new aws.S3({
+  accessKeyId: '',
+  secretAccessKey: '',
+  Bucket: ''
+})
 
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');

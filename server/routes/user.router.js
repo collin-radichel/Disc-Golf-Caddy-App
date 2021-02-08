@@ -48,14 +48,15 @@ router.post('/logout', (req, res) => {
 });
 
 router.put('/profilePic/:id', (req,res) => {
-  const newProfilePic = req.body;
-  console.log('req.params', req.params)
+  const newProfilePic = req.body.image;
+  const id = req.params.id
+  console.log('id', id)
 
   const query = `UPDATE "user"
                   SET "profile_picture" = $1
                   WHERE id=$2;`;
 
-  pool.query(query, [newProfilePic, req.params.id])
+  pool.query(query, [newProfilePic, id])
   .then(() => { res.sendStatus(200); })
     .catch((err) => {
       console.log('Error completing UPDATE user Profile Pic query', err);
