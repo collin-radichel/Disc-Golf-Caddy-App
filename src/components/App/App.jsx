@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AddDisc from '../AddDisc/AddDisc'
 
 import './App.css';
 
@@ -100,6 +101,13 @@ function App() {
             authRedirect="/user"
           >
             <LandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+          exact
+          path="/addDisc"
+          >
+          <AddDisc />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
