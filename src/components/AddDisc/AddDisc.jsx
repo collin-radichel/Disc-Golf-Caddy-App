@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import Slider from '@material-ui/core/Slider';
+import Slider from "@material-ui/core/Slider";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
 import FlightTakeoffRoundedIcon from "@material-ui/icons/FlightTakeoffRounded";
@@ -10,6 +12,7 @@ import SpeedRoundedIcon from "@material-ui/icons/SpeedRounded";
 import TextFieldsRoundedIcon from "@material-ui/icons/TextFieldsRounded";
 import PhotoLibraryRoundedIcon from "@material-ui/icons/PhotoLibraryRounded";
 import FitnessCenterRoundedIcon from "@material-ui/icons/FitnessCenterRounded";
+import Box from "@material-ui/core/Box";
 import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,20 +28,25 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "center",
   },
   slider: {
-      width: 200
-  }
+    width: 200,
+  },
+  flightImages: {
+    boxShadow: "0 4px 6px #291528",
+    borderRadius: "5px",
+    margin: 5,
+  },
 }));
 
 const marks = [
-    {
-      value: 1,
-      label: 'very bad',
-    },
-    {
-      value: 10,
-      label: 'brand new',
-    },
-  ];
+  {
+    value: 1,
+    label: "very bad",
+  },
+  {
+    value: 10,
+    label: "brand new",
+  },
+];
 
 function AddDisc() {
   const dispatch = useDispatch();
@@ -46,9 +54,16 @@ function AddDisc() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_DISC_TYPES" });
+    dispatch({ type: "FETCH_DISC_DISTANCES" });
+    dispatch({ type: "FETCH_DISC_FLIGHT_PATTERNS" });
   }, []);
 
-  const discTypes = useSelector((store) => store.type);
+  const discTypes = useSelector((store) => store.discTypes);
+  const discDistances = useSelector((store) => store.discDistances);
+  const discFlightPatterns = useSelector((store) => store.discFlightPatterns);
+
+  console.log("discFlightPatterns", discFlightPatterns);
+
   const [newDisc, setNewDisc] = useState({
     name: "",
     image: "",
@@ -58,138 +73,178 @@ function AddDisc() {
     glide: "",
     turn: "",
     fade: "",
+    flightPattern: "",
     condition: "",
+    discDistance: "",
+    inMyBag: "",
+    notes: "",
   });
 
   const handleChange = (event) => {
+    console.log("event", event.target);
     setNewDisc({ ...newDisc, [event.target.name]: event.target.value });
+  };
+
+  const handleSliderChange = (event, value) => {
+    console.log("event", event.target);
+    setNewDisc({ ...newDisc, condition: value });
+  };
+
+  const handleInMyBagChange = (event, value) => {
+    console.log("event", event.target);
+    setNewDisc({ ...newDisc, inMyBag: value });
+  };
+
+  const handleFlightPatternChange = (event, value) => {
+    console.log("event", event.target);
+    console.log('value', value);
+    setNewDisc({ ...newDisc, flightPattern: value });
   };
 
   console.log("newDisc:", newDisc);
 
   return (
-    <div>
-      <div className={classes.margin}>
+    <Grid
+      container
+      direction="column"
+      spacing={1}
+      className={classes.margin}
+      justify="center"
+      alignItems="center"
+    >
+      <Grid item>
         <h3 className={classes.headers}>
           Please fill in each input field
           <br />
           then press SAVE
         </h3>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <TextFieldsRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="nameInput"
-              label="Disc Name"
-              onChange={handleChange}
-              name="name"
-            />
-          </Grid>
-        </Grid>
-        <br />
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <PhotoLibraryRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="imageInput"
-              label="Image URL"
-              onChange={handleChange}
-              name="image"
-            />
-          </Grid>
-        </Grid>
-        <br />
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <FitnessCenterRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="weightInput"
-              label="Weight(g)"
-              onChange={handleChange}
-              name="weight"
-            />
-          </Grid>
-        </Grid>
-        <br />
-        <Grid container spacing={1} alignItems="flex-end">
-          <form>
-            <select
-              className={classes.discTypeSelect}
-              onChange={handleChange}
-              name="discType"
-            >
-              {discTypes?.map((type) => (
-                <option key={type.id} value={type.type}>
-                  {type.type}
-                </option>
-              ))}
-            </select>
-          </form>
-        </Grid>
-        <br />
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <TextFieldsRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="nameInput"
+            label="Disc Name"
+            onChange={handleChange}
+            name="name"
+          />
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <PhotoLibraryRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="imageInput"
+            label="Image URL"
+            onChange={handleChange}
+            name="image"
+          />
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <FitnessCenterRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="weightInput"
+            label="Weight(g)"
+            onChange={handleChange}
+            name="weight"
+          />
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <select
+            className={classes.discTypeSelect}
+            onChange={handleChange}
+            name="discType"
+          >
+            {discTypes?.map((type) => (
+              <option key={type.id} value={type.type}>
+                {type.type}
+              </option>
+            ))}
+          </select>
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
         <h3 className={classes.headers}>Flight Numbers</h3>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <SpeedRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="speedInput"
-              label="Speed (1 to 14)"
-              onChange={handleChange}
-              name="speed"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <FlightTakeoffRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="glideInput"
-              label="Glide (1 TO 7)"
-              onChange={handleChange}
-              name="glide"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <ArrowForwardRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="turnInput"
-              label="Turn (+1 TO -5)"
-              onChange={handleChange}
-              name="turn"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <ArrowBackRoundedIcon fontSize="small" color="primary" />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="fadeInput"
-              label="Fade (0 TO 5)"
-              onChange={handleChange}
-              name="fade"
-            />
-          </Grid>
-        </Grid>
-        <br/>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <SpeedRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="speedInput"
+            label="Speed (1 to 14)"
+            onChange={handleChange}
+            name="speed"
+          />
+        </Box>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <FlightTakeoffRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="glideInput"
+            label="Glide (1 TO 7)"
+            onChange={handleChange}
+            name="glide"
+          />
+        </Box>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <ArrowForwardRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="turnInput"
+            label="Turn (+1 TO -5)"
+            onChange={handleChange}
+            name="turn"
+          />
+        </Box>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <ArrowBackRoundedIcon fontSize="small" color="primary" />
+          <TextField
+            id="fadeInput"
+            label="Fade (0 TO 5)"
+            onChange={handleChange}
+            name="fade"
+          />
+        </Box>
+      </Grid>
+      <br />
+
+
+
+      
+          {discFlightPatterns?.map((pattern) => (
+            <Grid item key={pattern.id} display="flex" alignItems="center">
+              <img
+                onClick={handleFlightPatternChange}
+                height="90"
+                width="90"
+                value={pattern.id}
+                className={classes.flightImages}
+                src={pattern.flight_pattern_image}
+              ></img>
+              </Grid>
+          ))}
+      
+
+
+
+      <br />
+      <Grid item>
         <h3 className={classes.headers}>Condition</h3>
-        <div className={classes.slider}>
-        <Grid container spacing={1} alignItems="flex-end">
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center" className={classes.slider}>
           <Slider
             defaultValue={1}
             step={1}
@@ -197,13 +252,55 @@ function AddDisc() {
             min={1}
             max={10}
             valueLabelDisplay="on"
-            name="condition"
-            onChangeCommitted={handleChange}
+            onChangeCommitted={handleSliderChange}
           />
-        </Grid>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <h3 className={classes.headers}>Distance</h3>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <select
+            className={classes.discDistanceSelect}
+            onChange={handleChange}
+            name="discDistance"
+          >
+            {discDistances?.map((distance) => (
+              <option key={distance.id} value={distance.distance}>
+                {distance.distance}
+              </option>
+            ))}
+          </select>
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <FormControlLabel
+            name="inMyBag"
+            control={<Switch color="primary" />}
+            label="InMyBag : "
+            labelPlacement="start"
+            onChange={handleInMyBagChange}
+          />
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <TextField
+            label="Notes"
+            multiline
+            rows={4}
+            variant="outlined"
+            name="notes"
+            onChange={handleChange}
+          />
+        </Box>
+      </Grid>
+    </Grid>
   );
 }
 
