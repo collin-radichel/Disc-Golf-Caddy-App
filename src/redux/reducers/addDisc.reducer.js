@@ -1,4 +1,4 @@
-const discTypes = (state = [], action) => {
+export const discTypes = (state = [], action) => {
     switch (action.type) {
       case 'SET_DISC_TYPES':
         return action.payload;
@@ -6,7 +6,21 @@ const discTypes = (state = [], action) => {
         return state;
     }
   };
-  
-  // user will be on the redux state at:
-  // state.user
-  export default discTypes;
+
+ export const discDistances = (state = [], action) => {
+    switch (action.type) {
+      case 'SET_DISC_DISTANCES':
+        return action.payload;
+      default:
+        return state;
+    }
+  };
+
+ export const discFlightPatterns = (state = [], action) => {
+    switch (action.type) {
+      case "SET_DISC_FLIGHT_PATTERNS":
+        return action.payload;
+      default:
+        return state;
+    }
+  };
