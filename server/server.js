@@ -9,8 +9,8 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const discInfoDropdowns = require('./routes/discInfoDropdowns.router');
-
+const discInfoDropdownsRouter = require('./routes/discInfoDropdowns.router');
+const addDiscRouter = require('./routes/addDisc.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -25,7 +25,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/discInfoDropdowns', discInfoDropdowns);
+app.use('/api/discInfoDropdowns', discInfoDropdownsRouter);
+app.use('/api/addDisc', addDiscRouter);
 
 // Serve static files
 app.use(express.static('build'));
