@@ -85,7 +85,7 @@ function AddDisc() {
     glide: "",
     turn: "",
     fade: "",
-    flightPattern_id: 2,
+    flightPattern_id: "",
     condition: 1,
     discDistance_id: 1,
     inMyBag: false,
@@ -116,21 +116,21 @@ function AddDisc() {
   const handleSubmitForm = () => {
     console.log("saving newDisc", newDisc);
     dispatch({ type: "POST_DISC", payload: newDisc });
-    // setNewDisc({
-    //   name: "",
-    //   image_path: "",
-    //   weight: "",
-    //   discType_id: "",
-    //   speed: "",
-    //   glide: "",
-    //   turn: "",
-    //   fade: "",
-    //   flightPattern_id: "",
-    //   condition: "",
-    //   discDistance_id: "",
-    //   inMyBag: "",
-    //   notes: "",
-    // });
+    setNewDisc({
+      name: "",
+      image_path: "",
+      weight: "",
+      discType_id: 1,
+      speed: "",
+      glide: "",
+      turn: "",
+      fade: "",
+      flightPattern_id: "",
+      condition: 1,
+      discDistance_id: 1,
+      inMyBag: false,
+      notes: "",
+    });
   };
 
   console.log("newDisc:", newDisc);

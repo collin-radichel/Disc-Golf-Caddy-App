@@ -8,8 +8,8 @@ router.post('/', (req, res) => {
     console.log(req.body)
     const queryText = `INSERT INTO inventory 
                         ("name", "image_path", "weight", "speed", "glide", "turn", "fade",
-                            "inMyBag", "condition", "flight_pattern_id", "distance_id", "type_id")
-                      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
+                            "inMyBag", "condition", "notes", "flight_pattern_id", "distance_id", "type_id")
+                      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`;
     const queryValues = [
       newDisc.name,
       newDisc.image_path,
@@ -20,9 +20,10 @@ router.post('/', (req, res) => {
       newDisc.fade,
       newDisc.inMyBag,
       newDisc.condition,
-      newDisc.flight_pattern_id,
-      newDisc.distance_id,
-      newDisc.type_id,
+      newDisc.notes,
+      newDisc.flightPattern_id,
+      newDisc.discDistance_id,
+      newDisc.discType_id,
     ];
     pool.query(queryText, queryValues)
       .then(() => { res.sendStatus(201); })
