@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -23,6 +24,24 @@ import AddDisc from '../AddDisc/AddDisc'
 
 import './App.css';
 
+const font = "'Mukta', sans-serif;"
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: font,
+  },
+  palette: {
+    primary: {
+      main: '#1b5e20'
+    },
+    secondary: {
+      main: '#3e2723'
+    }
+
+  }
+})
+
+
 function App() {
   const dispatch = useDispatch();
 
@@ -31,6 +50,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div>
         <Nav />
@@ -118,6 +138,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

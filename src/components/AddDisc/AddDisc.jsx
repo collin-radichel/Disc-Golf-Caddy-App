@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Slider from "@material-ui/core/Slider";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
@@ -17,7 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(10),
+    margin: theme.spacing(1),
     alignItems: "flex-center",
   },
   headers: {
@@ -34,6 +35,17 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 4px 6px #291528",
     borderRadius: "5px",
     margin: 5,
+    "&:hover": {
+      opacity: "70%",
+      height: 85,
+      width: 85,
+      justify: "center",
+    },
+  },
+  saveBtn: {
+    "&:hover": {
+      backgroundColor: "green",
+    },
   },
 }));
 
@@ -66,17 +78,17 @@ function AddDisc() {
 
   const [newDisc, setNewDisc] = useState({
     name: "",
-    image: "",
+    image_path: "",
     weight: "",
-    discType: "",
+    discType_id: 1,
     speed: "",
     glide: "",
     turn: "",
     fade: "",
-    flightPattern: "",
-    condition: "",
-    discDistance: "",
-    inMyBag: "",
+    flightPattern_id: "",
+    condition: 1,
+    discDistance_id: 1,
+    inMyBag: false,
     notes: "",
   });
 
@@ -95,10 +107,30 @@ function AddDisc() {
     setNewDisc({ ...newDisc, inMyBag: value });
   };
 
-  const handleFlightPatternChange = (event, value) => {
-    console.log("event", event.target);
-    console.log('value', value);
-    setNewDisc({ ...newDisc, flightPattern: value });
+  const handleFlightPatternChange = (value) => (event) => {
+    console.log("event.target", event.target);
+    console.log("value", value);
+    setNewDisc({ ...newDisc, flightPattern_id: value });
+  };
+
+  const handleSubmitForm = () => {
+    console.log("saving newDisc", newDisc);
+    dispatch({ type: "POST_DISC", payload: newDisc });
+    setNewDisc({
+      name: "",
+      image_path: "",
+      weight: "",
+      discType_id: 1,
+      speed: "",
+      glide: "",
+      turn: "",
+      fade: "",
+      flightPattern_id: "",
+      condition: 1,
+      discDistance_id: 1,
+      inMyBag: false,
+      notes: "",
+    });
   };
 
   console.log("newDisc:", newDisc);
@@ -107,7 +139,7 @@ function AddDisc() {
     <Grid
       container
       direction="column"
-      spacing={1}
+      spacing={3}
       className={classes.margin}
       justify="center"
       alignItems="center"
@@ -138,7 +170,7 @@ function AddDisc() {
             id="imageInput"
             label="Image URL"
             onChange={handleChange}
-            name="image"
+            name="image_path"
           />
         </Box>
       </Grid>
@@ -160,10 +192,10 @@ function AddDisc() {
           <select
             className={classes.discTypeSelect}
             onChange={handleChange}
-            name="discType"
+            name="discType_id"
           >
             {discTypes?.map((type) => (
-              <option key={type.id} value={type.type}>
+              <option key={type.id} value={type.id}>
                 {type.type}
               </option>
             ))}
@@ -220,24 +252,19 @@ function AddDisc() {
       </Grid>
       <br />
 
-
-
-      
-          {discFlightPatterns?.map((pattern) => (
-            <Grid item key={pattern.id} display="flex" alignItems="center">
-              <img
-                onClick={handleFlightPatternChange}
-                height="90"
-                width="90"
-                value={pattern.id}
-                className={classes.flightImages}
-                src={pattern.flight_pattern_image}
-              ></img>
-              </Grid>
-          ))}
-      
-
-
+      <Grid item container>
+        {discFlightPatterns?.map((pattern) => (
+          <Grid item key={pattern.id} display="flex" alignItems="center" xs={4}>
+            <img
+              onClick={handleFlightPatternChange(pattern.id)}
+              height="90"
+              width="90"
+              className={classes.flightImages}
+              src={pattern.flight_pattern_image}
+            ></img>
+          </Grid>
+        ))}
+      </Grid>
 
       <br />
       <Grid item>
@@ -265,10 +292,10 @@ function AddDisc() {
           <select
             className={classes.discDistanceSelect}
             onChange={handleChange}
-            name="discDistance"
+            name="discDistance_id"
           >
             {discDistances?.map((distance) => (
-              <option key={distance.id} value={distance.distance}>
+              <option key={distance.id} value={distance.id}>
                 {distance.distance}
               </option>
             ))}
@@ -298,6 +325,18 @@ function AddDisc() {
             name="notes"
             onChange={handleChange}
           />
+        </Box>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmitForm}
+            className={classes.saveBtn}
+          >
+            SAVE
+          </Button>
         </Box>
       </Grid>
     </Grid>
