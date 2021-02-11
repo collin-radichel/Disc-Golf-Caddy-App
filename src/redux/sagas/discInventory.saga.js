@@ -1,6 +1,7 @@
 import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
+
 function* postDisc(action) {
   try {
     console.log("postDisc started with action:", action);
@@ -12,8 +13,20 @@ function* postDisc(action) {
   }
 }
 
+
+function* fetchInventory() {
+    try {
+        const response = yield axios.get("/api/inventory");
+        yield put({ type: "SET_INVENTORY", payload: response.data });
+      } catch (err) {
+        console.log(`error in fetching inventory ${err}`);
+      }
+}
+
+
 function* discInventorySaga() {
   yield takeLatest("POST_DISC", postDisc);
+  yield takeLatest("FETCH_INVENTORY", fetchInventory);
 }
 
 export default discInventorySaga;
