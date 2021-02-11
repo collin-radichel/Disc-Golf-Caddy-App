@@ -21,6 +21,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AddDisc from '../AddDisc/AddDisc'
+import Inventory from '../Inventory/Inventory'
 
 import './App.css';
 
@@ -29,6 +30,9 @@ const font = "'Mukta', sans-serif;"
 const theme = createMuiTheme({
   typography: {
     fontFamily: font,
+    allVariants: {
+      color: '#FFFFFF'
+    }
   },
   palette: {
     primary: {
@@ -52,7 +56,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <Router>
-      <div>
+      <div className="wholeApp">
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -128,6 +132,13 @@ function App() {
           path="/addDisc"
           >
           <AddDisc />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/inventory"
+            >
+            <Inventory />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

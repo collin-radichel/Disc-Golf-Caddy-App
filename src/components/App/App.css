@@ -16,6 +16,10 @@ img {
   max-width: 100%;
 }
 
+.wholeApp {
+  background-color: #3e2723;
+}
+
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
@@ -111,4 +115,35 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+
+/* --------------------------------------------------------------------------------
+Cards
+-------------------------------------------------------------------------------- */
+
+.card {
+  display :inline-block;
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px #291528;
+  margin: 10px 10px;
+}
+
+.cardImage:hover {
+  opacity: 75%;
+}
+
+#card {
+  background: #1b5e20;
+}
+
+.cardImage {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px #291528;
 }

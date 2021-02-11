@@ -21,7 +21,13 @@ function Dashboard() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              history.push("/inventory");
+            }}
+            >
             Inventory
           </Button>
         </Grid>
