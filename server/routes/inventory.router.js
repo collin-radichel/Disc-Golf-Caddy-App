@@ -9,13 +9,12 @@ router.get("/", (req, res) => {
   // return all disc distances
   const queryText =
   
-    `SELECT "inventory".name, "inventory".image_path, "inventory".weight, "inventory".speed,
-        "inventory".glide, "inventory".turn, "inventory".fade, "inventory".notes,
-        "inventory"."inMyBag", "flight_patterns".flight_pattern, "distance".distance, "disc_types".type
+    `SELECT "inventory".*, "flight_patterns".flight_pattern, "distance".distance, "disc_types".type
             FROM "inventory"
                 JOIN "flight_patterns" ON "flight_patterns".id = "inventory".flight_pattern_id
                 JOIN "distance" ON "distance".id = "inventory".distance_id
-                JOIN "disc_types" ON "disc_types".id = "inventory".type_id;`;
+                JOIN "disc_types" ON "disc_types".id = "inventory".type_id
+                ORDER BY "inventory"."inMyBag" DESC;`;
   pool
     .query(queryText)
     .then((result) => {
@@ -30,8 +29,18 @@ router.get("/", (req, res) => {
 /**
  * POST route template
  */
-router.post("/", (req, res) => {
-  // POST route code here
+router.put("/:id", (req, res) => {
+  let id = req.params.id
+
+  const query = `UPDATE "inventory"
+                    SET "inMyBag" = NOT "inMyBag"
+                    WHERE id=$1;`
+
+    pool.query(query, [id])
+    .then(() => {res.sendStatus(201);})
+    .catch((error) => {
+        console.log('Error completing UPDATE inMyBag', error);
+    })
 });
 
 module.exports = router;
