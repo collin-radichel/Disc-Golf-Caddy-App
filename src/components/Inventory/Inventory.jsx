@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
+
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -20,18 +22,24 @@ const useStyles = makeStyles((theme) => ({
 function Inventory() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: "FETCH_INVENTORY" });
   }, []);
 
+
   const inventory = useSelector((store) => store.inventory);
 
-  
 
   const handleInMyBagChange = (id) => {
     dispatch({type: "UPDATE_IN_MY_BAG", payload: id});
     console.log('id', id);
+  }
+
+  const handleShowDetails = (id) => {
+      dispatch({type: "FETCH_DISC_DETAILS", payload: id})
+      history.push('/discDetails')
   }
 
   return (
@@ -49,7 +57,7 @@ function Inventory() {
         <Grid item key={disc.id} display="flex" alignItems="center">
           <Card className="card" id="card">
             <CardContent>
-              <img className="cardImage" src={disc.image_path}></img>
+              <img className="cardImage" src={disc.image_path} onClick={() => handleShowDetails(disc.id)}></img>
             </CardContent>
             <CardContent>
               <Typography>{disc.name}</Typography>
@@ -71,9 +79,6 @@ function Inventory() {
               />
               }
             </CardContent>
-            
-                
-           
           </Card>
         </Grid>
       ))}
