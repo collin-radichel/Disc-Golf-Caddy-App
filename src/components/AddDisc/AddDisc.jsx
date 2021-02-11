@@ -15,7 +15,6 @@ import PhotoLibraryRoundedIcon from "@material-ui/icons/PhotoLibraryRounded";
 import FitnessCenterRoundedIcon from "@material-ui/icons/FitnessCenterRounded";
 import Box from "@material-ui/core/Box";
 import { useSelector, useDispatch } from "react-redux";
-import { StayPrimaryPortraitTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
