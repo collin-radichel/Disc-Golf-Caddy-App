@@ -132,6 +132,10 @@ Cards
   margin: 10px 10px;
 }
 
+.cardImage:hover {
+  opacity: 75%;
+}
+
 #card {
   background: #1b5e20;
 }

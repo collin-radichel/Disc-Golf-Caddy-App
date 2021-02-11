@@ -39,7 +39,7 @@ function Inventory() {
           <Grid item key={disc.id} display="flex" alignItems="center">
               <Card className="card" id="card">
                   <CardContent>
-                      <img className="cardImage" ></img>
+                      <img className="cardImage" src={disc.image_path}></img>
                   </CardContent>
                   <CardContent>
                   <Typography>{disc.name}</Typography>
