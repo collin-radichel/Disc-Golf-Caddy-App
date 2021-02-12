@@ -41,8 +41,7 @@ function Inventory() {
   }
 
   const handleShowDetails = (id) => {
-      dispatch({type: "FETCH_DISC_DETAILS", payload: id})
-      history.push('/discDetails')
+      history.push(`/discDetails/${id}`)
   }
 
   return (

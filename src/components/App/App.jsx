@@ -23,6 +23,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import AddDisc from "../AddDisc/AddDisc";
 import Inventory from "../Inventory/Inventory";
 import DiscDetails from "../DiscDetails/DiscDetails"
+import EditDisc from "../EditDisc/EditDisc"
 
 import "./App.css";
 
@@ -134,8 +135,12 @@ function App() {
               <Inventory />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path="/discDetails">
+            <ProtectedRoute exact path="/discDetails/:id">
               <DiscDetails />
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path ="/editDisc/:id">
+              <EditDisc/>
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}

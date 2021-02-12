@@ -9,6 +9,22 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
+CREATE TABLE "inventory" (
+	"id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (255) NOT NULL,
+    "image_path" VARCHAR (255) NOT NULL,
+    "weight" INT NOT NULL,
+    "speed" INT NOT NULL,
+    "glide" INT NOT NULL,
+    "turn" INT NOT NULL,
+    "fade" INT NOT NULL,
+    "inMyBag" BOOLEAN NOT NULL,
+    "condition" INT NOT NULL,
+    "notes" VARCHAR (1000),
+    "flight_pattern_id" INT REFERENCES "flight_patterns" NOT NULL,
+    "distance_id" INT REFERENCES "distance" NOT NULL,
+    "type_id" INT REFERENCES "disc_types" NOT NULL
+);
 
 
 

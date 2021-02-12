@@ -7,10 +7,14 @@ export const inventory = (state = [], action) => {
     }
   };
 
-  export const discDetails = (state = [], action) => {
+  export const discDetails = (state = {}, action) => {
     switch (action.type) {
       case 'SET_DISC_DETAIL':
-        return [action.payload];
+        return action.payload;
+      case 'SET_EDIT_INPUTS':
+        return {...state, [action.payload.key]: action.payload.event}
+      case 'EDIT_FLIGHT_PATTERN':
+        return {...state, flight_pattern_id: action.payload}
       default:
         return state;
     }
