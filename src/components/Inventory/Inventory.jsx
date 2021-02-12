@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     alignItems: "flex-center",
   },
+  name: {
+    fontSize: 35,
+  }
 }));
 
 function Inventory() {
@@ -60,7 +63,7 @@ function Inventory() {
               <img className="cardImage" src={disc.image_path} onClick={() => handleShowDetails(disc.id)}></img>
             </CardContent>
             <CardContent>
-              <Typography>{disc.name}</Typography>
+              <Typography className={classes.name}>{disc.name}</Typography>
               {disc.inMyBag ? 
               <FormControlLabel
                 name="inMyBag"

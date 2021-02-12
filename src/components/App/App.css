@@ -147,3 +147,29 @@ Cards
   border-radius: 50%;
   box-shadow: 0 4px 6px #291528;
 }
+
+.cardImage {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px #291528;
+}
+
+.detailsCard {
+  display :inline-block;
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px #291528;
+  margin: 10px 10px;
+}
+
+.detailsCardImage {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px #291528;
+}
