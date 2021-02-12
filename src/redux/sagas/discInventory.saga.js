@@ -14,7 +14,8 @@ function* fetchInventory() {
 
 function* fetchDiscDetails(action) {
     try {
-        const response = yield axios.get(`/api/inventory/${action.payload}`);
+      // console.log('action.payload', action.payload)
+        const response = yield axios.get(`/api/discDetails/${action.payload}`);
         console.log("response.data[0]", response.data[0]);
         yield put({ type: "SET_DISC_DETAIL", payload: response.data[0] });
       } catch (err) {
@@ -46,13 +47,19 @@ function* updateInMyBag(action) {
       }
 }
 
-// WATCH
+function* saveEditDisc(action) {
+  console.log('action:',action)
+    yield axios.put(`/api/discDetails/${action.payload.id}`, action.payload)
+    yield put({type: "FETCH_DISC_DETAILS", payload: action.payload.id})
+}
 
+// WATCH
 function* discInventorySaga() {
   yield takeLatest("POST_DISC", postDisc);
   yield takeLatest("FETCH_INVENTORY", fetchInventory);
   yield takeLatest("UPDATE_IN_MY_BAG", updateInMyBag);
   yield takeLatest("FETCH_DISC_DETAILS", fetchDiscDetails);
+  yield takeLatest("SAVE_EDIT_DISC", saveEditDisc)
 }
 
 export default discInventorySaga;

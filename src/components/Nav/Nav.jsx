@@ -32,8 +32,8 @@ function Nav() {
           <Typography>Inventory</Typography>
         </Link>
 
-        <Link className="navLink" to="/about">
-          About
+        <Link className="navLink" to="/addDisc">
+          Add Disc
         </Link>
 
         {user.id && (
