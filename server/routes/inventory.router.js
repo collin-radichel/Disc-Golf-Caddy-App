@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   console.log('id', id)
-  const query = `SELECT "inventory".*, "flight_patterns".flight_pattern, "distance".distance, "disc_types".type
+  const query = `SELECT "inventory".*, "flight_patterns".flight_pattern, "flight_patterns".flight_pattern_image, "distance".distance, "disc_types".type
                     FROM "inventory"
                     JOIN "flight_patterns" ON "flight_patterns".id = "inventory".flight_pattern_id
                     JOIN "distance" ON "distance".id = "inventory".distance_id
