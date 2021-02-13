@@ -63,6 +63,11 @@ function Inventory() {
             </CardContent>
             <CardContent>
               <Typography className={classes.name}>{disc.name}</Typography>
+              <Typography>
+              {disc.weight}(g)
+              <br/>
+              {disc.type}
+              </Typography>
               {disc.inMyBag ? 
               <FormControlLabel
                 name="inMyBag"

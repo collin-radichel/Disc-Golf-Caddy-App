@@ -15,8 +15,9 @@ export const inventory = (state = [], action) => {
         return {...state, [action.payload.key]: action.payload.event}
       case 'EDIT_FLIGHT_PATTERN':
         return {...state, flight_pattern_id: action.payload}
+      case 'EDIT_CONDITION':
+        return {...state, condition: action.payload}
       default:
         return state;
     }
   };
-  

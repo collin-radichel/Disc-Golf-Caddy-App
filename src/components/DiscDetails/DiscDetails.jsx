@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 20,
   },
   type: {
-    fontSize: 20,
+    fontSize: 35,
   },
   weight: {
-    fontSize: 20,
+    fontSize: 25,
   },
   flight_pattern: {
     fontSize: 25,
@@ -138,6 +138,14 @@ function DiscDetails(props) {
                   className={classes.flight_pattern_image}
                   src={discDetails.flight_pattern_image}
                 ></img>
+              </Box>
+            </CardContent>
+            <CardContent>
+              <Box>
+              <Typography className={classes.flight_pattern}>
+              Typical Distance
+                </Typography>
+              <Typography className={classes.flightNumbers}>{discDetails.distance}ft</Typography>
               </Box>
             </CardContent>
             <CardContent>

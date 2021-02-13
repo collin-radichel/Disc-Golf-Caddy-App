@@ -106,6 +106,9 @@ function EditDisc() {
     dispatch({type: "EDIT_FLIGHT_PATTERN", payload: id})
   }
 
+  const handleConditionChange = (id) => {
+    dispatch({type: "EDIT_CONDITION", payload: id})
+  }
 
   return (
     <Grid
@@ -239,7 +242,41 @@ function EditDisc() {
           </Grid>
         ))}
       </Grid>
-
+      <br />
+      <Grid item>
+        <h3 className={classes.headers}>Condition</h3>
+      </Grid>
+      <Grid item>
+        <Box display="flex" alignItems="center" className={classes.slider}>
+          <Slider
+            defaultValue={discDetails.condition}
+            step={1}
+            marks={marks}
+            min={1}
+            max={10}
+            valueLabelDisplay="on"
+            onChangeCommitted={handleConditionChange}
+          />
+        </Box>
+      </Grid>
+      <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <select
+            className={classes.discDistanceSelect}
+            onChange={handleEditInputs("distance_id")}
+            value={discDetails.distance_id}
+            name="distance_id"
+          >
+            {discDistances?.map((distance) => (
+              <option key={distance.id} value={distance.id}>
+                {distance.distance}
+              </option>
+            ))}
+          </select>
+        </Box>
+      </Grid>
+      <br />
       <button onClick={saveChanges}>SAVE CHANGES</button>
     </Grid>
   );
