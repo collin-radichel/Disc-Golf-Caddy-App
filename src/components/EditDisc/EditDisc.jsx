@@ -106,8 +106,13 @@ function EditDisc() {
     dispatch({type: "EDIT_FLIGHT_PATTERN", payload: id})
   }
 
-  const handleConditionChange = (id) => {
-    dispatch({type: "EDIT_CONDITION", payload: id})
+  const handleConditionChange = (event, value) => {
+      console.log('value:', value)
+    dispatch({type: "EDIT_CONDITION", payload: value})
+  }
+
+  const handleInMyBagChange = (event, value) => {
+    
   }
 
   return (
@@ -261,6 +266,9 @@ function EditDisc() {
       </Grid>
       <br />
       <Grid item>
+        <h3 className={classes.headers}>Distance</h3>
+      </Grid>
+      <Grid item>
         <Box display="flex" alignItems="center">
           <select
             className={classes.discDistanceSelect}
@@ -277,6 +285,18 @@ function EditDisc() {
         </Box>
       </Grid>
       <br />
+      <Grid item>
+        <Box display="flex" alignItems="center">
+          <FormControlLabel
+            name="inMyBag"
+            control={<Switch color="primary" />}
+            label="InMyBag : "
+            labelPlacement="start"
+            onChange={handleInMyBagChange}
+          />
+        </Box>
+      </Grid>
+      <br/>
       <button onClick={saveChanges}>SAVE CHANGES</button>
     </Grid>
   );
