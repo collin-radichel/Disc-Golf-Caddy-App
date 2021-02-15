@@ -49,4 +49,17 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
     });
 });
 
+
+// delete a disc
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  console.log(req.params);
+  const queryText = 'DELETE FROM "inventory" WHERE id=$1 AND "user_id" = $2';
+  pool.query(queryText, [req.params.id, req.user.id])
+    .then(() => { res.sendStatus(200); })
+    .catch((err) => {
+      console.log('Error in favorites router DELETE:', err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

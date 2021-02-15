@@ -25,7 +25,7 @@ function Nav() {
       </Link>
       <div>
         <Link className="navLink" to={loginLinkData.path}>
-          {loginLinkData.text}
+        <Typography>{loginLinkData.text}</Typography>
         </Link>
 
         <Link className="navLink" to="/inventory">
@@ -33,13 +33,13 @@ function Nav() {
         </Link>
 
         <Link className="navLink" to="/addDisc">
-          Add Disc
+          <Typography>Add Disc</Typography>
         </Link>
 
         {user.id && (
           <>
             <Link className="navLink" to="/info">
-              Info Page
+             <Typography>Info Page</Typography>
             </Link>
             <LogOutButton className="navLink" />
           </>

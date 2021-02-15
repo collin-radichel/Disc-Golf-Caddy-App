@@ -53,6 +53,18 @@ function* saveEditDisc(action) {
     yield put({type: "FETCH_DISC_DETAILS", payload: action.payload.id})
 }
 
+function* deleteDisc(action) {
+  try {
+    const discID = action.payload.id;
+    console.log('removing disc with id:', discID);
+    console.log('******** payload: ', discID);
+    yield axios.delete(`/api/inventory/${discID}`);
+    yield put({type: 'FETCH_INVENTORY'});
+} catch (err) {
+    console.log(`error in removing disc: ${err}`);
+}
+}
+
 // WATCH
 
 function* discInventorySaga() {
@@ -60,7 +72,8 @@ function* discInventorySaga() {
   yield takeLatest("FETCH_INVENTORY", fetchInventory);
   yield takeLatest("UPDATE_IN_MY_BAG", updateInMyBag);
   yield takeLatest("FETCH_DISC_DETAILS", fetchDiscDetails);
-  yield takeLatest("SAVE_EDIT_DISC", saveEditDisc)
+  yield takeLatest("SAVE_EDIT_DISC", saveEditDisc);
+  yield takeLatest("DELETE_DISC", deleteDisc);
 }
 
 export default discInventorySaga;

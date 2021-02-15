@@ -8,8 +8,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
-import EditRoundedIcon from '@material-ui/icons/EditRounded';
+import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import Swal from "sweetalert2"
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   flightNumbers: {
     marginBlockStart: 10,
-    fontSize: 20
+    fontSize: 20,
   },
   condition: {
     fontSize: 20,
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   flight_pattern: {
     fontSize: 25,
-    textDecoration: "underline",
+    // textDecoration: "underline",
   },
   flight_pattern_image: {
     borderRadius: 5,
@@ -58,14 +59,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function DiscDetails(props) {
-
-
-  useEffect(()=> {
-    dispatch({type: "FETCH_DISC_DETAILS", payload: id})
+  useEffect(() => {
+    dispatch({ type: "FETCH_DISC_DETAILS", payload: id });
   }, []);
 
-  let {id} = useParams();
-  console.log('id:', id)
+  let { id } = useParams();
+  console.log("id:", id);
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
@@ -78,12 +77,25 @@ function DiscDetails(props) {
   };
 
   const handleEditDisc = () => {
-  
     history.push(`/editDisc/${id}`);
   };
 
   const handleDeleteDisc = () => {
-
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your disc has been deleted.", "success");
+        dispatch({ type: "DELETE_DISC", payload: discDetails });
+        history.push("/inventory");
+      }
+    });
   };
 
   return (
@@ -95,80 +107,106 @@ function DiscDetails(props) {
       justify="center"
       alignItems="center"
     >
-        <Grid item key={discDetails.id} display="flex" alignItems="center">
-          <Card className="detailsCard" id="card">
-            <CardContent>
-              <img className="detailsCardImage" src={discDetails.image_path}></img>
-            </CardContent>
-            <Typography className={classes.name}>{discDetails.name}</Typography>
-            <Typography className={classes.type}>{discDetails.type}</Typography>
-            <Typography className={classes.weight}>{discDetails.weight}(g)</Typography>
-            <CardContent display="inline" >
-              <Box display="inline-block" p={1} m={1}>
-                <Typography >Speed</Typography>
-                <Typography className={classes.flightNumbers}>{discDetails.speed}</Typography>
-              </Box>
-              <Box display="inline-block" p={1} m={1}>
-                <Typography>Glide</Typography>
-                <Typography className={classes.flightNumbers}>{discDetails.glide}</Typography>
-              </Box>
-              <Box display="inline-block" p={1} m={1}>
-                <Typography>Turn</Typography>
-                <Typography className={classes.flightNumbers}>{discDetails.turn}</Typography>
-              </Box>
-              <Box display="inline-block" p={1} m={1}>
-                <Typography>Fade</Typography>
-                <Typography className={classes.flightNumbers}>{discDetails.fade}</Typography>
-              </Box>
-            </CardContent>
-            <CardContent>
-              <Box>
-                <Typography className={classes.condition}>
-                  Condition: {discDetails.condition}/10
-                </Typography>
-              </Box>
-            </CardContent>
-            <CardContent>
-              <Box>
-                <Typography className={classes.flight_pattern}>
-                  Flight Pattern
-                </Typography>
-                <Typography>{discDetails.flight_pattern}</Typography>
-                <img
-                  className={classes.flight_pattern_image}
-                  src={discDetails.flight_pattern_image}
-                ></img>
-              </Box>
-            </CardContent>
-            <CardContent>
-              <Box>
+      <Grid item key={discDetails.id} display="flex" alignItems="center">
+        <Card className="detailsCard" id="card">
+          <CardContent>
+            <img
+              className="detailsCardImage"
+              src={discDetails.image_path}
+            ></img>
+          </CardContent>
+          <Typography className={classes.name}>{discDetails.name}</Typography>
+          <Typography className={classes.type}>{discDetails.type}</Typography>
+          <Typography className={classes.weight}>
+            {discDetails.weight}(g)
+          </Typography>
+          <CardContent display="inline">
+            <Box display="inline-block" p={1} m={1}>
+              <Typography>Speed</Typography>
+              <Typography className={classes.flightNumbers}>
+                {discDetails.speed}
+              </Typography>
+            </Box>
+            <Box display="inline-block" p={1} m={1}>
+              <Typography>Glide</Typography>
+              <Typography className={classes.flightNumbers}>
+                {discDetails.glide}
+              </Typography>
+            </Box>
+            <Box display="inline-block" p={1} m={1}>
+              <Typography>Turn</Typography>
+              <Typography className={classes.flightNumbers}>
+                {discDetails.turn}
+              </Typography>
+            </Box>
+            <Box display="inline-block" p={1} m={1}>
+              <Typography>Fade</Typography>
+              <Typography className={classes.flightNumbers}>
+                {discDetails.fade}
+              </Typography>
+            </Box>
+          </CardContent>
+          <CardContent>
+            <Box>
+              <Typography className={classes.condition}>
+                Condition: {discDetails.condition}/10
+              </Typography>
+            </Box>
+          </CardContent>
+          <CardContent>
+            <Box>
               <Typography className={classes.flight_pattern}>
-              Typical Distance
-                </Typography>
-              <Typography className={classes.flightNumbers}>{discDetails.distance}ft</Typography>
-              </Box>
-            </CardContent>
-            <CardContent>
-              <Box className={classes.notesBox}>
-                <Typography>Notes:</Typography>
-                <br />
-                <Typography>{discDetails.notes}</Typography>
-              </Box>
-            </CardContent>
-            <CardContent>
-              <Box display="inline-block" p={1} m={2}>
-                <Button startIcon={<EditRoundedIcon />} className={classes.editBtn} variant="contained" color="secondary" onClick={handleEditDisc}>
-                  EDIT
-                </Button>
-              </Box>
-              <Box display="inline-block" p={1} m={2}>   
-                <Button startIcon={<DeleteForeverRoundedIcon />} className={classes.deleteBtn} variant="contained" onClick={handleDeleteDisc}>
-                  DELETE
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
+                Flight Pattern
+              </Typography>
+              <Typography>{discDetails.flight_pattern}</Typography>
+              <img
+                className={classes.flight_pattern_image}
+                src={discDetails.flight_pattern_image}
+              ></img>
+            </Box>
+          </CardContent>
+          <CardContent>
+            <Box>
+              <Typography className={classes.flight_pattern}>
+                Typical Distance
+              </Typography>
+              <Typography className={classes.flightNumbers}>
+                {discDetails.distance}ft
+              </Typography>
+            </Box>
+          </CardContent>
+          <CardContent>
+            <Box className={classes.notesBox}>
+              <Typography>Notes:</Typography>
+              <br />
+              <Typography>{discDetails.notes}</Typography>
+            </Box>
+          </CardContent>
+          <CardContent>
+            <Box display="inline-block" p={1} m={2}>
+              <Button
+                startIcon={<EditRoundedIcon />}
+                className={classes.editBtn}
+                variant="contained"
+                color="secondary"
+                onClick={handleEditDisc}
+              >
+                EDIT
+              </Button>
+            </Box>
+            <Box display="inline-block" p={1} m={2}>
+              <Button
+                startIcon={<DeleteForeverRoundedIcon />}
+                className={classes.deleteBtn}
+                variant="contained"
+                onClick={handleDeleteDisc}
+              >
+                DELETE
+              </Button>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
       <Box>
         <Button
           variant="contained"
