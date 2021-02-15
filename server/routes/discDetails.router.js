@@ -1,11 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-    router.put('/:id', (req, res) => {
+    router.put('/:id', rejectUnauthenticated, (req, res) => {
         // Update this single student
         console.log(req.body)
         const sqlText = `UPDATE "inventory"
@@ -51,7 +54,7 @@ const router = express.Router();
 /**
  * GET Routes
  */
-router.get("/:id", (req, res) => {
+router.get("/:id", rejectUnauthenticated, (req, res) => {
     const id = req.params.id;
     console.log('id', id)
     const query = `SELECT "inventory".*, "flight_patterns".flight_pattern, "flight_patterns".flight_pattern_image, "distance".distance, "disc_types".type

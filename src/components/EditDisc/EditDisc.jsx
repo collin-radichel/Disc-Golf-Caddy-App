@@ -3,8 +3,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import ArrowBackRoundedIcon from "@material-ui/icons/ArrowBackRounded";
 import ArrowForwardRoundedIcon from "@material-ui/icons/ArrowForwardRounded";
 import FlightTakeoffRoundedIcon from "@material-ui/icons/FlightTakeoffRounded";
@@ -21,49 +19,49 @@ import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
-    margin: {
-      margin: theme.spacing(1),
-      alignItems: "flex-center",
+  margin: {
+    margin: theme.spacing(1),
+    alignItems: "flex-center",
+  },
+  headers: {
+    textAlign: "center",
+    alignItems: "flex-end",
+    fontSize: 30,
+  },
+  discTypeSelect: {
+    alignContent: "center",
+  },
+  slider: {
+    width: 200,
+  },
+  flightImages: {
+    boxShadow: "0 4px 6px #291528",
+    borderRadius: "5px",
+    margin: 5,
+    "&:hover": {
+      opacity: "70%",
+      height: 85,
+      width: 85,
+      justify: "center",
     },
-    headers: {
-      textAlign: "center",
-      alignItems: "flex-end",
-      fontSize: 30
+  },
+  saveBtn: {
+    "&:hover": {
+      backgroundColor: "green",
     },
-    discTypeSelect: {
-      alignContent: "center",
-    },
-    slider: {
-      width: 200,
-    },
-    flightImages: {
-      boxShadow: "0 4px 6px #291528",
-      borderRadius: "5px",
-      margin: 5,
-      "&:hover": {
-        opacity: "70%",
-        height: 85,
-        width: 85,
-        justify: "center",
-      },
-    },
-    saveBtn: {
-      "&:hover": {
-        backgroundColor: "green",
-      },
-    },
-  }));
-  
-  const marks = [
-    {
-      value: 1,
-      label: "very bad",
-    },
-    {
-      value: 10,
-      label: "brand new",
-    },
-  ];
+  },
+}));
+
+const marks = [
+  {
+    value: 1,
+    label: "very bad",
+  },
+  {
+    value: 10,
+    label: "brand new",
+  },
+];
 
 function EditDisc() {
   const dispatch = useDispatch();
@@ -85,7 +83,7 @@ function EditDisc() {
   }, [id]);
 
   const handleEditInputs = (key) => (event) => {
-      console.log('event', event)
+    console.log("event", event);
     dispatch({
       type: "SET_EDIT_INPUTS",
       payload: { key, event: event.target.value },
@@ -93,7 +91,7 @@ function EditDisc() {
   };
 
   const saveChanges = () => {
-      console.log('discDetails:::::', discDetails)
+    console.log("discDetails:::::", discDetails);
     // trigger a saga that will save our local changes in the DB
     dispatch({
       type: "SAVE_EDIT_DISC",
@@ -103,17 +101,13 @@ function EditDisc() {
   };
 
   const handleFlightPatternChange = (id) => {
-    dispatch({type: "EDIT_FLIGHT_PATTERN", payload: id})
-  }
+    dispatch({ type: "EDIT_FLIGHT_PATTERN", payload: id });
+  };
 
   const handleConditionChange = (event, value) => {
-      console.log('value:', value)
-    dispatch({type: "EDIT_CONDITION", payload: value})
-  }
-
-  const handleInMyBagChange = (event, value) => {
-    
-  }
+    console.log("value:", value);
+    dispatch({ type: "EDIT_CONDITION", payload: value });
+  };
 
   return (
     <Grid
@@ -124,7 +118,7 @@ function EditDisc() {
       justify="center"
       alignItems="center"
     >
-        <Grid item>
+      <Grid item>
         <Typography className={classes.headers}>
           Edit your disc
           <br />
@@ -235,17 +229,23 @@ function EditDisc() {
 
       <Grid item container>
         {discFlightPatterns &&
-        discFlightPatterns.map((pattern) => (
-          <Grid item key={pattern.id} display="flex" alignItems="center" xs={4}>
-            <img
-              onClick={() => handleFlightPatternChange(pattern.id)}
-              height="90"
-              width="90"
-              className={classes.flightImages}
-              src={pattern.flight_pattern_image}
-            ></img>
-          </Grid>
-        ))}
+          discFlightPatterns.map((pattern) => (
+            <Grid
+              item
+              key={pattern.id}
+              display="flex"
+              alignItems="center"
+              xs={4}
+            >
+              <img
+                onClick={() => handleFlightPatternChange(pattern.id)}
+                height="90"
+                width="90"
+                className={classes.flightImages}
+                src={pattern.flight_pattern_image}
+              ></img>
+            </Grid>
+          ))}
       </Grid>
       <br />
       <Grid item>
@@ -254,7 +254,7 @@ function EditDisc() {
       <Grid item>
         <Box display="flex" alignItems="center" className={classes.slider}>
           <Slider
-            defaultValue={discDetails.condition}
+            defaultValue={discDetails?.condition}
             step={1}
             marks={marks}
             min={1}
@@ -286,17 +286,18 @@ function EditDisc() {
       </Grid>
       <br />
       <Grid item>
+      <Typography>Notes</Typography>
         <Box display="flex" alignItems="center">
-          <FormControlLabel
-            name="inMyBag"
-            control={<Switch color="primary" />}
-            label="InMyBag : "
-            labelPlacement="start"
-            onChange={handleInMyBagChange}
+          <TextField
+            multiline
+            rows={4}
+            variant="outlined"
+            name="notes"
+            value={discDetails.notes}
+            onChange={handleEditInputs("notes")}
           />
         </Box>
       </Grid>
-      <br/>
       <button onClick={saveChanges}>SAVE CHANGES</button>
     </Grid>
   );

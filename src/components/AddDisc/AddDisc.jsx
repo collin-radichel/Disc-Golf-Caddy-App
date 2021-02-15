@@ -13,7 +13,9 @@ import SpeedRoundedIcon from "@material-ui/icons/SpeedRounded";
 import TextFieldsRoundedIcon from "@material-ui/icons/TextFieldsRounded";
 import PhotoLibraryRoundedIcon from "@material-ui/icons/PhotoLibraryRounded";
 import FitnessCenterRoundedIcon from "@material-ui/icons/FitnessCenterRounded";
+import { useHistory } from 'react-router-dom';
 import Box from "@material-ui/core/Box";
+import Swal from 'sweetalert2';
 import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   headers: {
     textAlign: "center",
     alignItems: "flex-end",
+    color: "#FFFFFF"
   },
   discTypeSelect: {
     alignContent: "center",
@@ -63,6 +66,7 @@ const marks = [
 function AddDisc() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: "FETCH_DISC_TYPES" });
@@ -130,6 +134,14 @@ function AddDisc() {
       discDistance_id: 1,
       inMyBag: false,
       notes: "",
+    });
+    history.push('/inventory')
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your disc has been saved',
+      showConfirmButton: false,
+      timer: 1400
     });
   };
 

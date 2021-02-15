@@ -71,6 +71,7 @@ function Inventory() {
               {disc.inMyBag ? 
               <FormControlLabel
                 name="inMyBag"
+                checked="true"
                 control={<Switch color="secondary" />}
                 label="In My Bag : "
                 labelPlacement="start"

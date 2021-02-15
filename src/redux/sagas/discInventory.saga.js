@@ -30,7 +30,7 @@ function* postDisc(action) {
     console.log("postDisc started with action:", action);
     const newDisc = action.payload;
     yield axios.post("/api/addDisc", newDisc);
-    // yield put({ type: "FETCH_DISCS" });
+    yield put({ type: "FETCH_INVENTORY" });
   } catch (error) {
     console.log("error in postDisc function", error);
   }
