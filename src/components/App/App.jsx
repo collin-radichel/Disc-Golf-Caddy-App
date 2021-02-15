@@ -33,7 +33,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: font,
     allVariants: {
-      color: "#FFFFFF",
+      // color: "#FFFFFF",
     },
   },
   palette: {
@@ -41,8 +41,8 @@ const theme = createMuiTheme({
       main: "#1b5e20",
     },
     secondary: {
-      main: "#3e2723",
-    },
+      main: "#8d6e63",
+    }
   },
 });
 

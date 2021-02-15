@@ -30,7 +30,7 @@ function* postDisc(action) {
     console.log("postDisc started with action:", action);
     const newDisc = action.payload;
     yield axios.post("/api/addDisc", newDisc);
-    // yield put({ type: "FETCH_DISCS" });
+    yield put({ type: "FETCH_INVENTORY" });
   } catch (error) {
     console.log("error in postDisc function", error);
   }
@@ -53,13 +53,27 @@ function* saveEditDisc(action) {
     yield put({type: "FETCH_DISC_DETAILS", payload: action.payload.id})
 }
 
+function* deleteDisc(action) {
+  try {
+    const discID = action.payload.id;
+    console.log('removing disc with id:', discID);
+    console.log('******** payload: ', discID);
+    yield axios.delete(`/api/inventory/${discID}`);
+    yield put({type: 'FETCH_INVENTORY'});
+} catch (err) {
+    console.log(`error in removing disc: ${err}`);
+}
+}
+
 // WATCH
+
 function* discInventorySaga() {
   yield takeLatest("POST_DISC", postDisc);
   yield takeLatest("FETCH_INVENTORY", fetchInventory);
   yield takeLatest("UPDATE_IN_MY_BAG", updateInMyBag);
   yield takeLatest("FETCH_DISC_DETAILS", fetchDiscDetails);
-  yield takeLatest("SAVE_EDIT_DISC", saveEditDisc)
+  yield takeLatest("SAVE_EDIT_DISC", saveEditDisc);
+  yield takeLatest("DELETE_DISC", deleteDisc);
 }
 
 export default discInventorySaga;
