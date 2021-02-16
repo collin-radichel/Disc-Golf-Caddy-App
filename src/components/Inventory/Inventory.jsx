@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -56,7 +55,7 @@ function Inventory() {
     >
     <Typography>*Tap your disc for more info</Typography>
       {inventory?.map((disc) => (
-        <Grid item key={disc.id} display="flex" alignItems="center">
+        <Grid item key={disc.id} display="flex">
           <Card className="card" id="card">
             <CardContent>
               <img className="cardImage" src={disc.image_path} onClick={() => handleShowDetails(disc.id)}></img>
@@ -71,7 +70,7 @@ function Inventory() {
               {disc.inMyBag ? 
               <FormControlLabel
                 name="inMyBag"
-                checked="true"
+                checked={true}
                 control={<Switch color="secondary" />}
                 label="In My Bag : "
                 labelPlacement="start"

@@ -15,7 +15,7 @@ import PhotoLibraryRoundedIcon from "@material-ui/icons/PhotoLibraryRounded";
 import FitnessCenterRoundedIcon from "@material-ui/icons/FitnessCenterRounded";
 import { useHistory } from 'react-router-dom';
 import Box from "@material-ui/core/Box";
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/src/sweetalert2.js'
 import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -97,7 +97,7 @@ function AddDisc() {
   });
 
   const handleChange = (event) => {
-    console.log("event", event.target);
+    console.log("event.target.value", event.target.value);
     setNewDisc({ ...newDisc, [event.target.name]: event.target.value });
   };
 
@@ -138,10 +138,10 @@ function AddDisc() {
     history.push('/inventory')
     Swal.fire({
       position: 'center',
-      icon: 'success',
-      title: 'Your disc has been saved',
-      showConfirmButton: false,
-      timer: 1400
+        icon: 'success',
+        title: 'Your disc has been saved',
+        showConfirmButton: false,
+        timer: 1000
     });
   };
 

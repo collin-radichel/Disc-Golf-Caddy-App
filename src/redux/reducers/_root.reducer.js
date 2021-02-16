@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import {discTypes, discDistances, discFlightPatterns} from './addDisc.reducer'
 import {inventory, discDetails} from './inventory.reducer'
+import {discSuggestion} from './discSuggestion.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   discDistances,
   discFlightPatterns,
   inventory,
-  discDetails
+  discDetails,
+  discSuggestion
 });
 
 export default rootReducer;

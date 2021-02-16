@@ -24,6 +24,8 @@ import AddDisc from "../AddDisc/AddDisc";
 import Inventory from "../Inventory/Inventory";
 import DiscDetails from "../DiscDetails/DiscDetails"
 import EditDisc from "../EditDisc/EditDisc"
+import DiscSuggestion from "../DiscSuggestion/DiscSuggestion"
+import DiscSuggestionResults from "../DiscSuggestionResults/DiscSuggestionResults"
 
 import "./App.css";
 
@@ -141,6 +143,14 @@ function App() {
 
             <ProtectedRoute exact path ="/editDisc/:id">
               <EditDisc/>
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path ="/discSuggestion">
+              <DiscSuggestion/>
+            </ProtectedRoute>
+
+            <ProtectedRoute exact path ="/discSuggestionResults">
+              <DiscSuggestionResults/>
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}

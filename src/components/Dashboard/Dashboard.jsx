@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,48 +7,67 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
+  margin: {
+    margin: theme.spacing(1),
+    alignItems: "flex-center",
   },
+  images: {
+    objectFit: "fill",
+    width: "700px",
+    height: "250px"
+  }
 }));
 
 function Dashboard() {
   const classes = useStyles();
   const history = useHistory();
-  const user = useSelector((store) => store.user);
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              history.push("/inventory");
-            }}
-            >
-            Inventory
-          </Button>
-        </Grid>
-        <Grid>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              history.push("/addDisc");
-            }}
-          >
-            Add Disc
-          </Button>
-        </Grid>
-        <Grid>
-          <Button variant="outlined" color="secondary">
-            Give Suggestion
-          </Button>
-        </Grid>
+    <Grid
+      container
+      direction="column"
+      spacing={3}
+      className={classes.margin}
+      justify="center"
+      alignItems="center"
+    >
+      <Grid item>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            history.push("/inventory");
+          }}
+        >
+          Inventory
+        </Button>
       </Grid>
-    </div>
+      <Grid item>
+        <img className={classes.images} src="https://i.imgur.com/94udVBh.jpg"></img>
+      </Grid>
+      <Grid item>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            history.push("/addDisc");
+          }}
+        >
+          Add Disc
+        </Button>
+      </Grid>
+      <Grid item>
+        <img className={classes.images} src="https://i.imgur.com/udvi5Iu.jpg"></img>
+      </Grid>
+      <Grid item>
+        <Button variant="contained" color="primary" onClick={() => {history.push("/discSuggestion")}}>
+          Give Me A Suggestion
+        </Button>
+      </Grid>
+      <Grid item>
+        <img className={classes.images} src="https://i.imgur.com/lloIzSv.jpg"></img>
+      </Grid>
+    </Grid>
   );
 }
 
