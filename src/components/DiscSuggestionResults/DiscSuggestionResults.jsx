@@ -28,7 +28,6 @@ function DiscSuggestionResults() {
 
   const discSuggestion = useSelector((store) => store.discSuggestion);
   const inventory = useSelector((store) => store.inventory);
-  const user = useSelector((store) => store.user);
 
   console.log("discSuggestion:", discSuggestion);
   console.log("inventory:", inventory);
@@ -67,9 +66,8 @@ function DiscSuggestionResults() {
     {inventory?.map((disc) => {
           return (
               <>
-        {discSuggestion.flightPattern_id === disc.flight_pattern_id
-            && discSuggestion.discDistance_id === disc.distance_id
-            && discSuggestion.discType_id === disc.type_id ? 
+        {discSuggestion.discDistance_id === disc.distance_id + 1
+            || discSuggestion.discDistance_id === disc.distance_id - 1 ? 
           <Grid item key={disc.id} display="flex">
               <Typography color="primary">Close!</Typography>
           <Card className="card" id="card">

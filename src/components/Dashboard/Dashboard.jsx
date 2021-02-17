@@ -6,10 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   images: {
     objectFit: "fill",

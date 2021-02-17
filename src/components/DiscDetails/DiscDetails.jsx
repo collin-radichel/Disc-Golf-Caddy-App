@@ -15,8 +15,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   name: {
     fontSize: 50,

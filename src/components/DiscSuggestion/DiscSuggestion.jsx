@@ -11,8 +11,9 @@ import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%",
   },
   flightImages: {
     boxShadow: "0 4px 6px #291528",
@@ -31,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#FFFFFF",
     fontSize: "35px",
   },
+  patternContainer: {
+    width: "375px",
+    justifyContent: "center",
+  }
 }));
 
 function DiscSuggestion(props) {
@@ -63,22 +68,22 @@ function DiscSuggestion(props) {
   };
 
   const handleCalulateSuggestion = () => {
-      console.log("getting suggestion based on input:", suggestionInput);
-      dispatch({type: "GET_DISC_SUGGESTION", payload : suggestionInput});
-      setSuggestionInput({
-        flightPattern_id: "",
-        discDistance_id: 1,
-        discType_id: 1,
-      });
-      Swal.fire({
-        position: 'top',
-        timerProgressBar: true,
-        title: 'Calculating Results...',
-        showConfirmButton: false,
-        timer: 900
-      });
-      history.push('/discSuggestionResults');
-  }
+    console.log("getting suggestion based on input:", suggestionInput);
+    dispatch({ type: "GET_DISC_SUGGESTION", payload: suggestionInput });
+    setSuggestionInput({
+      flightPattern_id: "",
+      discDistance_id: 1,
+      discType_id: 1,
+    });
+    Swal.fire({
+      position: "top",
+      timerProgressBar: true,
+      title: "Calculating Results...",
+      showConfirmButton: false,
+      timer: 900,
+    });
+    history.push("/discSuggestionResults");
+  };
 
   useEffect(() => {
     dispatch({ type: "FETCH_DISC_TYPES" });
@@ -95,7 +100,7 @@ function DiscSuggestion(props) {
       justify="center"
       alignItems="center"
     >
-        <Typography className={classes.headers}>
+      <Typography className={classes.headers}>
         Please Select a type of disc
       </Typography>
       <Grid item>
@@ -116,15 +121,10 @@ function DiscSuggestion(props) {
       <Typography className={classes.headers}>
         Please Select your desired Flight Pattern
       </Typography>
-      <Grid item container>
+      <Grid item container className={classes.patternContainer}>
         {discFlightPatterns &&
           discFlightPatterns.map((pattern) => (
-            <Grid
-              item
-              key={pattern.id}
-              display="flex"
-              xs={4}
-            >
+            <Grid item key={pattern.id} display="flex" alignItems="center" justifyContent="center">
               <img
                 onClick={handleFlightPatternChange(pattern.id)}
                 height="90"
@@ -137,7 +137,9 @@ function DiscSuggestion(props) {
       </Grid>
       <br />
       <Grid item>
-        <Typography className={classes.headers}>Select desired distance</Typography>
+        <Typography className={classes.headers}>
+          Select desired distance
+        </Typography>
       </Grid>
       <Grid item>
         <Box display="flex">
@@ -155,7 +157,13 @@ function DiscSuggestion(props) {
         </Box>
       </Grid>
       <Grid item>
-      <Button variant="contained" color="primary" onClick={handleCalulateSuggestion}>CALCULATE SUGGESTION</Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleCalulateSuggestion}
+        >
+          CALCULATE SUGGESTION
+        </Button>
       </Grid>
     </Grid>
   );

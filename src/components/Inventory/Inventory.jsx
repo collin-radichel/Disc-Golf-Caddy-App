@@ -13,8 +13,9 @@ import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   name: {
     fontSize: 35,
@@ -44,7 +45,6 @@ function Inventory() {
   }
 
   return (
-    
     <Grid
       container
       direction="column"

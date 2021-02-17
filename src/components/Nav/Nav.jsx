@@ -1,52 +1,78 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
-import {useSelector} from 'react-redux';
-import Typography from "@material-ui/core/Typography"
-
-function Nav() {
-  const user = useSelector((store) => store.user);
-
-  let loginLinkData = {
-    path: '/login',
-    text: 'Login / Register',
-  };
-
-  if (user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
-  }
-
-  return (
-    <div className="nav">
-      <Link to="/user">
-        <h2 className="nav-title">DGC</h2>
-      </Link>
-      <div>
-        <Link className="navLink" to={loginLinkData.path}>
-        <Typography>{loginLinkData.text}</Typography>
-        </Link>
-
-        <Link className="navLink" to="/inventory">
-          <Typography>Inventory</Typography>
-        </Link>
-
-        <Link className="navLink" to="/addDisc">
-          <Typography>Add Disc</Typography>
-        </Link>
-
-        {user.id && (
-          <>
-            {/* <Link className="navLink" to="/info">
-             <Typography>About</Typography>
-            </Link> */}
-            <LogOutButton className="navLink" />
-          </>
-        )}
-      </div>
-    </div>
-  );
+import LogOutButton from '../LogOutButton/LogOutButton'
+import { makeStyles } from '@material-ui/core/styles'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuIcon from '@material-ui/icons/Menu'
+import Button from '@material-ui/core/Button'
+import Drawer from '@material-ui/core/Drawer'
+import Divider from '@material-ui/core/Divider'
+const useStyles = makeStyles({
+    fullList: {
+        width: 'auto'
+    },
+    navIcon: {
+        color: 'white',
+    }
+})
+  function Nav() {
+    const classes = useStyles()
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const [state, setState] = useState(false)
+    const user = useSelector((store) => store.user);
+    const toggleDrawer = (open) => (e) => {
+        if (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Shift')) {
+            return;
+        }
+        setState(!state)
+    }
+    let loginLinkData = {
+      path: '/login',
+      text: 'Login / Register',
+    };
+    if (user.id != null) {
+      loginLinkData.path = '/home';
+      loginLinkData.text = 'Home';
+    }
+    const logOut = () => {
+        dispatch({ type: 'LOGOUT' })
+        history.push('/')
+    }
+    return (
+        <div className="navContainer">
+            <Button onClick={toggleDrawer(true)}><MenuIcon className={classes.navIcon} /></Button>
+            <Drawer className={classes.fullList} anchor="top" open={state} onClose={toggleDrawer({top: false})} onClick={toggleDrawer({top: false})} onKeyDown={toggleDrawer({top: false})}>
+                <List>
+                    <Link to={loginLinkData.path}>
+                        <ListItem>
+                            <ListItemText primary={loginLinkData.text} />
+                        </ListItem>
+                        <Divider />
+                    </Link>
+                    <Link to="/inventory">
+                        <ListItem>
+                            <ListItemText primary="Inventory" />
+                        </ListItem>
+                        <Divider />
+                    </Link>
+                    <Link to="/addDisc">
+                        <ListItem button>
+                            <ListItemText primary="Add Disc" />
+                        </ListItem>
+                        <Divider />
+                    </Link>
+                    <ListItem button onClick={logOut}>
+                        <ListItemText primary="Log Out"  />
+                    </ListItem>
+                </List>
+            </Drawer>
+        </div>
+    )
 }
 
 export default Nav;

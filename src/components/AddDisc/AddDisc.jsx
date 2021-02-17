@@ -13,15 +13,17 @@ import SpeedRoundedIcon from "@material-ui/icons/SpeedRounded";
 import TextFieldsRoundedIcon from "@material-ui/icons/TextFieldsRounded";
 import PhotoLibraryRoundedIcon from "@material-ui/icons/PhotoLibraryRounded";
 import FitnessCenterRoundedIcon from "@material-ui/icons/FitnessCenterRounded";
+import Tooltip from '@material-ui/core/Tooltip';
 import { useHistory } from 'react-router-dom';
 import Box from "@material-ui/core/Box";
 import Swal from 'sweetalert2/src/sweetalert2.js'
 import { useSelector, useDispatch } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   headers: {
     textAlign: "center",
@@ -50,6 +52,14 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "green",
     },
   },
+  icon: {
+    marginTop: "15px",
+    marginRight: "5px"
+  },
+  patternContainer: {
+    width: "375px",
+    justifyContent: "center"
+  }
 }));
 
 const marks = [
@@ -148,6 +158,7 @@ function AddDisc() {
   console.log("newDisc:", newDisc);
 
   return (
+    <div className="addDiscContainer">
     <Grid
       container
       direction="column"
@@ -165,7 +176,7 @@ function AddDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <TextFieldsRoundedIcon fontSize="small" color="primary" />
+          <TextFieldsRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="nameInput"
             label="Disc Name"
@@ -177,7 +188,7 @@ function AddDisc() {
       <br />
       <Grid item>
         <Box display="flex" alignItems="center">
-          <PhotoLibraryRoundedIcon fontSize="small" color="primary" />
+          <PhotoLibraryRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="imageInput"
             label="Image URL"
@@ -189,7 +200,7 @@ function AddDisc() {
       <br />
       <Grid item>
         <Box display="flex" alignItems="center">
-          <FitnessCenterRoundedIcon fontSize="small" color="primary" />
+          <FitnessCenterRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="weightInput"
             label="Weight(g)"
@@ -220,7 +231,7 @@ function AddDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <SpeedRoundedIcon fontSize="small" color="primary" />
+          <SpeedRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="speedInput"
             label="Speed (1 to 14)"
@@ -231,7 +242,7 @@ function AddDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <FlightTakeoffRoundedIcon fontSize="small" color="primary" />
+          <FlightTakeoffRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="glideInput"
             label="Glide (1 TO 7)"
@@ -242,7 +253,7 @@ function AddDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <ArrowForwardRoundedIcon fontSize="small" color="primary" />
+          <ArrowForwardRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="turnInput"
             label="Turn (+1 TO -5)"
@@ -253,7 +264,7 @@ function AddDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <ArrowBackRoundedIcon fontSize="small" color="primary" />
+          <ArrowBackRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="fadeInput"
             label="Fade (0 TO 5)"
@@ -263,10 +274,10 @@ function AddDisc() {
         </Box>
       </Grid>
       <br />
-
-      <Grid item container>
+      <Grid item container className={classes.patternContainer}>
         {discFlightPatterns?.map((pattern) => (
-          <Grid item key={pattern.id} display="flex" alignItems="center" xs={4}>
+          <Grid item key={pattern.id} display="flex" alignItems="center" justifyContent="center">
+            <Tooltip title={pattern.flight_pattern} placement="top">
             <img
               onClick={handleFlightPatternChange(pattern.id)}
               height="90"
@@ -274,10 +285,10 @@ function AddDisc() {
               className={classes.flightImages}
               src={pattern.flight_pattern_image}
             ></img>
+            </Tooltip>
           </Grid>
         ))}
       </Grid>
-
       <br />
       <Grid item>
         <h3 className={classes.headers}>Condition</h3>
@@ -352,6 +363,7 @@ function AddDisc() {
         </Box>
       </Grid>
     </Grid>
+    </div>
   );
 }
 
