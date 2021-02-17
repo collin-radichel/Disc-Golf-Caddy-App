@@ -12,7 +12,7 @@ const {
 
 router.get("/", rejectUnauthenticated, (req, res) => {
   console.log("req.user", req.user)
-  const queryText = `SELECT "inventory".*, "flight_patterns".flight_pattern, "distance".distance, "disc_types".type
+  const queryText = `SELECT "inventory".*, "flight_patterns".flight_pattern, "flight_patterns".flight_pattern_image, "distance".distance, "disc_types".type
                         FROM "inventory"
                         JOIN "flight_patterns" ON "flight_patterns".id = "inventory".flight_pattern_id
                         JOIN "distance" ON "distance".id = "inventory".distance_id

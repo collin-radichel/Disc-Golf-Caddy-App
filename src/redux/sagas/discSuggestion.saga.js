@@ -2,10 +2,9 @@ import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 
-function* getDiscSuggestion() {
+function* getDiscSuggestion(action) {
     try {
-        const response = yield axios.get(`/api/discSuggestion`);
-        yield put({type : "SET_DISC_SUGGESTION", payload: response.data});
+        yield put({type : "SET_DISC_SUGGESTION", payload: action.payload});
     } catch (error) {
         console.log(`error in getting disc suggestion ${error}`)
     }

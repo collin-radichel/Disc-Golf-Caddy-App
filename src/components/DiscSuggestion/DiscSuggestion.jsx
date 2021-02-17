@@ -58,7 +58,7 @@ function DiscSuggestion(props) {
     console.log("event.target.value", event.target.value);
     setSuggestionInput({
       ...suggestionInput,
-      [event.target.name]: event.target.value,
+      [event.target.name]: Number(event.target.value),
     });
   };
 
@@ -67,8 +67,8 @@ function DiscSuggestion(props) {
       dispatch({type: "GET_DISC_SUGGESTION", payload : suggestionInput});
       setSuggestionInput({
         flightPattern_id: "",
-        discDistance_id: "",
-        discType_id: "",
+        discDistance_id: 1,
+        discType_id: 1,
       });
       Swal.fire({
         position: 'top',
