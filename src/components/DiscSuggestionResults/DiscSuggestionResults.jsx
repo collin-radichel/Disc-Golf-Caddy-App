@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   name: {
     fontSize: 35,
   },
+  title: {
+    alignItems: "flex-center"
+  }
 }));
 
 function DiscSuggestionResults() {
@@ -48,7 +51,7 @@ function DiscSuggestionResults() {
             && discSuggestion.discDistance_id === disc.distance_id
             && discSuggestion.discType_id === disc.type_id ? 
           <Grid item key={disc.id} display="flex">
-              <Typography color="primary">Exact Match!</Typography>
+              <Typography className={classes.title} color="primary">EXACT MATCH</Typography>
           <Card className="card" id="card">
             <CardContent>
                 <Typography className={classes.name}>{disc.name}</Typography>
@@ -69,7 +72,7 @@ function DiscSuggestionResults() {
         {discSuggestion.discDistance_id === disc.distance_id + 1
             || discSuggestion.discDistance_id === disc.distance_id - 1 ? 
           <Grid item key={disc.id} display="flex">
-              <Typography color="primary">Close!</Typography>
+              <Typography className={classes.title} color="primary">NEAR EXACT MATCH</Typography>
           <Card className="card" id="card">
             <CardContent>
                 <Typography className={classes.name}>{disc.name}</Typography>

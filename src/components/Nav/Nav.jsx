@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Button from '@material-ui/core/Button'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
+import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles({
     fullList: {
         width: 'auto'
@@ -63,6 +64,12 @@ const useStyles = makeStyles({
                     <Link to="/addDisc">
                         <ListItem button>
                             <ListItemText primary="Add Disc" />
+                        </ListItem>
+                        <Divider />
+                    </Link>
+                    <Link to="/discSuggestion">
+                        <ListItem button>
+                            <ListItemText primary="Get Disc Suggestion" />
                         </ListItem>
                         <Divider />
                     </Link>

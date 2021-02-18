@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Swal from "sweetalert2";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -125,6 +126,7 @@ function DiscSuggestion(props) {
         {discFlightPatterns &&
           discFlightPatterns.map((pattern) => (
             <Grid item key={pattern.id} display="flex" alignItems="center" justifyContent="center">
+            <Tooltip title={pattern.flight_pattern} placement="top">
               <img
                 onClick={handleFlightPatternChange(pattern.id)}
                 height="90"
@@ -132,6 +134,7 @@ function DiscSuggestion(props) {
                 className={classes.flightImages}
                 src={pattern.flight_pattern_image}
               ></img>
+              </Tooltip>
             </Grid>
           ))}
       </Grid>
