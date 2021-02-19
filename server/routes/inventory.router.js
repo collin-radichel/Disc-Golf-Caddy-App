@@ -18,7 +18,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
                         JOIN "distance" ON "distance".id = "inventory".distance_id
                         JOIN "disc_types" ON "disc_types".id = "inventory".type_id
                         WHERE "user_id" = $1
-                        ORDER BY "inventory"."inMyBag" DESC;`;
+                        ORDER BY "inventory"."type_id" ASC;`;
   pool
     .query(queryText, [req.user.id])
     .then((result) => {

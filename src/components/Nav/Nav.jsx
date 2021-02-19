@@ -12,14 +12,17 @@ import Button from '@material-ui/core/Button'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import Typography from '@material-ui/core/Typography'
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     fullList: {
         width: 'auto'
     },
     navIcon: {
         color: 'white',
+    },
+    navContainer: {
+        backgroundColor: theme.palette.primary.dark
     }
-})
+}));
   function Nav() {
     const classes = useStyles()
     const dispatch = useDispatch()
@@ -45,7 +48,7 @@ const useStyles = makeStyles({
         history.push('/')
     }
     return (
-        <div className="navContainer">
+        <div className={classes.navContainer}>
             <Button onClick={toggleDrawer(true)}><MenuIcon className={classes.navIcon} /></Button>
             <Drawer className={classes.fullList} anchor="top" open={state} onClose={toggleDrawer({top: false})} onClick={toggleDrawer({top: false})} onKeyDown={toggleDrawer({top: false})}>
                 <List>

@@ -176,7 +176,7 @@ function AddDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <TextFieldsRoundedIcon className={classes.icon} fontSize="small" color="primary" />
+          <TextFieldsRoundedIcon className={classes.icon} fontSize="small"/>
           <TextField
             id="nameInput"
             label="Disc Name"
