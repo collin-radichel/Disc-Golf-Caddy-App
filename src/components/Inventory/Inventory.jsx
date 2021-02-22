@@ -18,7 +18,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%"
   },
   name: {
-    fontSize: 35,
+    fontSize: 45,
+  },
+  discInfo: {
+    fontSize: 30,
   }
 }));
 
@@ -62,7 +65,7 @@ function Inventory() {
             </CardContent>
             <CardContent>
               <Typography className={classes.name}>{disc.name}</Typography>
-              <Typography>
+              <Typography className={classes.discInfo}>
               {disc.weight}(g)
               <br/>
               {disc.type}

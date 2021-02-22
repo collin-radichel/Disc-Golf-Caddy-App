@@ -19,7 +19,7 @@ import Box from "@material-ui/core/Box";
 import Swal from 'sweetalert2/src/sweetalert2.js'
 import { useSelector, useDispatch } from "react-redux";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   margin: {
     margin: 0,
     alignItems: "flex-center",
@@ -28,7 +28,6 @@ const useStyles = makeStyles(() => ({
   headers: {
     textAlign: "center",
     alignItems: "flex-end",
-    color: "#FFFFFF"
   },
   discTypeSelect: {
     alignContent: "center",
@@ -54,7 +53,8 @@ const useStyles = makeStyles(() => ({
   },
   icon: {
     marginTop: "15px",
-    marginRight: "5px"
+    marginRight: "5px",
+    color: theme.palette.primary.dark,
   },
   patternContainer: {
     width: "375px",
@@ -330,7 +330,7 @@ function AddDisc() {
         <Box display="flex" alignItems="center">
           <FormControlLabel
             name="inMyBag"
-            control={<Switch color="primary" />}
+            control={<Switch color="primary"/>}
             label="InMyBag : "
             labelPlacement="start"
             onChange={handleInMyBagChange}

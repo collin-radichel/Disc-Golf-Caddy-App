@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Stick&display=swap');
 @import '@sweetalert2/theme-dark/dark.css';
 
 html,
 body,
 #react-root {
   height: 100%;
-  background-color: #8d6e63;
+  background-color: #ffa270;
 }
 
 body {
@@ -135,7 +136,7 @@ Cards
 }
 
 #card {
-  background: #438c44;
+  background: #00bcd4;
 }
 
 .cardImage {

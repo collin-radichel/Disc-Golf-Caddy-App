@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   headers: {
     textAlign: "center",
     alignItems: "flex-end",
-    color: "#FFFFFF",
+    color: "#00000",
     fontSize: "35px",
   },
   patternContainer: {

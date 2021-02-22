@@ -309,7 +309,8 @@ function EditDisc() {
           />
         </Box>
       </Grid>
-      <button onClick={saveChanges}>SAVE CHANGES</button>
+      <br/>
+      <Button variant="contained" color="primary" className={classes.saveBtn} onClick={saveChanges}>SAVE CHANGES</Button>
     </Grid>
   );
 }

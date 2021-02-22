@@ -11,8 +11,9 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   name: {
     fontSize: 35,
@@ -65,7 +66,8 @@ function DiscSuggestionResults() {
       {inventory?.map((disc) => {
         return (
           <>
-            {discSuggestion.flightPattern_id === disc.flight_pattern_id &&
+            {disc.inMyBag === true &&
+            discSuggestion.flightPattern_id === disc.flight_pattern_id &&
             discSuggestion.discDistance_id === disc.distance_id &&
             discSuggestion.discType_id === disc.type_id ? (
               <Grid item key={disc.id}>
@@ -113,7 +115,8 @@ function DiscSuggestionResults() {
       {inventory?.map((disc) => {
         return (
           <>
-            {discSuggestion.discDistance_id === disc.distance_id + 1 ||
+            {disc.inMyBag === true &&
+            discSuggestion.discDistance_id === disc.distance_id + 1 ||
             discSuggestion.discDistance_id === disc.distance_id - 1 ? (
               <Grid item key={disc.id} display="flex">
                 <Box display="flex">

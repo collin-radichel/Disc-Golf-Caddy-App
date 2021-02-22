@@ -22,10 +22,10 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import AddDisc from "../AddDisc/AddDisc";
 import Inventory from "../Inventory/Inventory";
-import DiscDetails from "../DiscDetails/DiscDetails"
-import EditDisc from "../EditDisc/EditDisc"
-import DiscSuggestion from "../DiscSuggestion/DiscSuggestion"
-import DiscSuggestionResults from "../DiscSuggestionResults/DiscSuggestionResults"
+import DiscDetails from "../DiscDetails/DiscDetails";
+import EditDisc from "../EditDisc/EditDisc";
+import DiscSuggestion from "../DiscSuggestion/DiscSuggestion";
+import DiscSuggestionResults from "../DiscSuggestionResults/DiscSuggestionResults";
 
 import "./App.css";
 
@@ -34,21 +34,16 @@ const font = "'Mukta', sans-serif;";
 const theme = createMuiTheme({
   typography: {
     fontFamily: font,
-    allVariants: {
-      // color: "#FFFFFF",
-    },
   },
   palette: {
     primary: {
-      main: "#438c44",
-      light: "#73bd71",
-      dark: "#0b5e19"
+      main: "#00bcd4",
     },
     secondary: {
-      main: "#8d6e63",
-    }
-  },
-});
+      main: "#ff7043",
+    },
+  }
+})
 
 function App() {
   const dispatch = useDispatch();
@@ -143,16 +138,16 @@ function App() {
               <DiscDetails />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path ="/editDisc/:id">
-              <EditDisc/>
+            <ProtectedRoute exact path="/editDisc/:id">
+              <EditDisc />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path ="/discSuggestion">
-              <DiscSuggestion/>
+            <ProtectedRoute exact path="/discSuggestion">
+              <DiscSuggestion />
             </ProtectedRoute>
 
-            <ProtectedRoute exact path ="/discSuggestionResults">
-              <DiscSuggestionResults/>
+            <ProtectedRoute exact path="/discSuggestionResults">
+              <DiscSuggestionResults />
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}

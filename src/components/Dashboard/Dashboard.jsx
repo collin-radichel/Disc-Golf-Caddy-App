@@ -33,6 +33,9 @@ function Dashboard() {
       alignItems="center"
     >
       <Grid item>
+        <img className={classes.images} src="https://i.imgur.com/94udVBh.jpg"></img>
+      </Grid>
+      <Grid item>
         <Button
           variant="contained"
           color="primary"
@@ -44,7 +47,7 @@ function Dashboard() {
         </Button>
       </Grid>
       <Grid item>
-        <img className={classes.images} src="https://i.imgur.com/94udVBh.jpg"></img>
+        <img className={classes.images} src="https://i.imgur.com/udvi5Iu.jpg"></img>
       </Grid>
       <Grid item>
         <Button
@@ -58,15 +61,12 @@ function Dashboard() {
         </Button>
       </Grid>
       <Grid item>
-        <img className={classes.images} src="https://i.imgur.com/udvi5Iu.jpg"></img>
+        <img className={classes.images} src="https://i.imgur.com/lloIzSv.jpg"></img>
       </Grid>
       <Grid item>
         <Button variant="contained" color="primary" onClick={() => {history.push("/discSuggestion")}}>
           Give Me A Suggestion
         </Button>
-      </Grid>
-      <Grid item>
-        <img className={classes.images} src="https://i.imgur.com/lloIzSv.jpg"></img>
       </Grid>
     </Grid>
   );
