@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -14,11 +13,15 @@ import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   name: {
-    fontSize: 35,
+    fontSize: 45,
+  },
+  discInfo: {
+    fontSize: 30,
   }
 }));
 
@@ -45,7 +48,6 @@ function Inventory() {
   }
 
   return (
-    
     <Grid
       container
       direction="column"
@@ -56,14 +58,14 @@ function Inventory() {
     >
     <Typography>*Tap your disc for more info</Typography>
       {inventory?.map((disc) => (
-        <Grid item key={disc.id} display="flex" alignItems="center">
+        <Grid item key={disc.id} display="flex">
           <Card className="card" id="card">
             <CardContent>
               <img className="cardImage" src={disc.image_path} onClick={() => handleShowDetails(disc.id)}></img>
             </CardContent>
             <CardContent>
               <Typography className={classes.name}>{disc.name}</Typography>
-              <Typography>
+              <Typography className={classes.discInfo}>
               {disc.weight}(g)
               <br/>
               {disc.type}
@@ -71,7 +73,7 @@ function Inventory() {
               {disc.inMyBag ? 
               <FormControlLabel
                 name="inMyBag"
-                checked="true"
+                checked={true}
                 control={<Switch color="secondary" />}
                 label="In My Bag : "
                 labelPlacement="start"

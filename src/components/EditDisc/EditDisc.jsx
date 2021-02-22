@@ -14,15 +14,17 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-    alignItems: "flex-center",
-  },
+    margin: {
+        margin: 0,
+        alignItems: "flex-center",
+        width: "100%"
+      },
   headers: {
     textAlign: "center",
     alignItems: "flex-end",
@@ -50,6 +52,13 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "green",
     },
   },
+  icon: {
+    marginRight: "5px",
+  },
+  patternContainer: {
+    width: "375px",
+    justifyContent: "center",
+  }
 }));
 
 const marks = [
@@ -127,7 +136,7 @@ function EditDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <TextFieldsRoundedIcon fontSize="small" color="primary" />
+          <TextFieldsRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="nameInput"
             value={discDetails.name}
@@ -139,7 +148,7 @@ function EditDisc() {
       <br />
       <Grid item>
         <Box display="flex" alignItems="center">
-          <PhotoLibraryRoundedIcon fontSize="small" color="primary" />
+          <PhotoLibraryRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="imageInput"
             value={discDetails.image_path}
@@ -151,7 +160,7 @@ function EditDisc() {
       <br />
       <Grid item>
         <Box display="flex" alignItems="center">
-          <FitnessCenterRoundedIcon fontSize="small" color="primary" />
+          <FitnessCenterRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="weightInput"
             value={discDetails.weight}
@@ -183,7 +192,7 @@ function EditDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <SpeedRoundedIcon fontSize="small" color="primary" />
+          <SpeedRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="speedInput"
             value={discDetails.speed}
@@ -194,7 +203,7 @@ function EditDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <FlightTakeoffRoundedIcon fontSize="small" color="primary" />
+          <FlightTakeoffRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="glideInput"
             value={discDetails.glide}
@@ -205,7 +214,7 @@ function EditDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <ArrowForwardRoundedIcon fontSize="small" color="primary" />
+          <ArrowForwardRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="turnInput"
             value={discDetails.turn}
@@ -216,7 +225,7 @@ function EditDisc() {
       </Grid>
       <Grid item>
         <Box display="flex" alignItems="center">
-          <ArrowBackRoundedIcon fontSize="small" color="primary" />
+          <ArrowBackRoundedIcon className={classes.icon} fontSize="small" color="primary" />
           <TextField
             id="fadeInput"
             value={discDetails.fade}
@@ -227,7 +236,7 @@ function EditDisc() {
       </Grid>
       <br />
 
-      <Grid item container>
+      <Grid item container className={classes.patternContainer}>
         {discFlightPatterns &&
           discFlightPatterns.map((pattern) => (
             <Grid
@@ -235,8 +244,9 @@ function EditDisc() {
               key={pattern.id}
               display="flex"
               alignItems="center"
-              xs={4}
+              justifyContent="center"
             >
+                <Tooltip title={pattern.flight_pattern} placement="top">
               <img
                 onClick={() => handleFlightPatternChange(pattern.id)}
                 height="90"
@@ -244,6 +254,7 @@ function EditDisc() {
                 className={classes.flightImages}
                 src={pattern.flight_pattern_image}
               ></img>
+              </Tooltip>
             </Grid>
           ))}
       </Grid>
@@ -298,7 +309,8 @@ function EditDisc() {
           />
         </Box>
       </Grid>
-      <button onClick={saveChanges}>SAVE CHANGES</button>
+      <br/>
+      <Button variant="contained" color="primary" className={classes.saveBtn} onClick={saveChanges}>SAVE CHANGES</Button>
     </Grid>
   );
 }

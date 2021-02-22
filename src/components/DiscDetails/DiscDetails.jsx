@@ -10,13 +10,14 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
-    margin: theme.spacing(1),
+    margin: 0,
     alignItems: "flex-center",
+    width: "100%"
   },
   name: {
     fontSize: 50,

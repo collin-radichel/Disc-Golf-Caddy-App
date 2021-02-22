@@ -12,13 +12,13 @@ const {
 
 router.get("/", rejectUnauthenticated, (req, res) => {
   console.log("req.user", req.user)
-  const queryText = `SELECT "inventory".*, "flight_patterns".flight_pattern, "distance".distance, "disc_types".type
+  const queryText = `SELECT "inventory".*, "flight_patterns".flight_pattern, "flight_patterns".flight_pattern_image, "distance".distance, "disc_types".type
                         FROM "inventory"
                         JOIN "flight_patterns" ON "flight_patterns".id = "inventory".flight_pattern_id
                         JOIN "distance" ON "distance".id = "inventory".distance_id
                         JOIN "disc_types" ON "disc_types".id = "inventory".type_id
                         WHERE "user_id" = $1
-                        ORDER BY "inventory"."inMyBag" DESC;`;
+                        ORDER BY "inventory"."type_id" ASC;`;
   pool
     .query(queryText, [req.user.id])
     .then((result) => {

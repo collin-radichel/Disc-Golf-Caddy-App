@@ -32,6 +32,7 @@ app.use('/api/addDisc', addDiscRouter);
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/discDetails', discDetailsRouter);
 
+
 // Serve static files
 app.use(express.static('build'));
 
