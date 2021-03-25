@@ -5,21 +5,23 @@ _Duration: 2-week solo project sprint_
 
 ## Description
 
-Imagine you’re on the tee-pad of a 500ft par 4 at your favorite disc golf course.  You haven’t played disc golf since last Fall.  You look in your bag, and see the plastic circles staring back at you.  Which one do you normally choose on long drives like this?  It’s hard to remember because it’s been months since you’ve played.  You pull out your phone to use the Disc Golf Caddy App.  This app allows you to prompt a suggestion of which disc in your bag you should throw on this particular hole.  No longer will you embarrass yourself in front of your friends because you will have the Disc Golf Caddy App working for you.
+Imagine you’re on the tee-pad of a 500ft par 4 at your favorite disc golf course.  You haven’t played disc golf since last Fall.  You look in your bag, and see the plastic circles staring back at you.  Which one do you normally choose on long drives like this?  It’s hard to remember because it’s been months since you’ve played.  You pull out your phone to use the Disc Golf Caddy App.
+
+This app allows you to prompt a suggestion of which disc in your bag you should throw on this particular hole.  No longer will you embarrass yourself in front of your friends because you will have the Disc Golf Caddy App working for you.
 
 This app serves as a database to keep track of all of your discs.  When you leave for a round, you can update your inventory with a switch to indicate which discs are in your bag currently.  As discs change overtime due to wear & tear, you can update their characteristics in the app.  When you are looking for a suggestion, you will enter the type of disc you are looking for as well as desired distance and flight pattern.  The app will then suggest discs that meet those criteria with 'exact match', or 'similar distance'.
 
 ## Screenshots
 
-Login
+### Login
 ![disc-login](https://user-images.githubusercontent.com/73554031/112509581-9d463b80-8d5e-11eb-9512-0e728b6deb97.png)
-Add Disc
+### Add Disc
 ![add-disc](https://user-images.githubusercontent.com/73554031/112509596-9fa89580-8d5e-11eb-86d6-76a9355ad77e.png)
-Inventory
+### Inventory
 ![inventory-discs](https://user-images.githubusercontent.com/73554031/112509608-a20aef80-8d5e-11eb-9143-560631270013.png)
-Suggest Disc
+### Suggest Disc
 ![suggestion-disc](https://user-images.githubusercontent.com/73554031/112509627-a46d4980-8d5e-11eb-8d78-d491ed756953.png)
-Suggest Disc Results
+### Suggest Disc Results
 ![suggestion-results](https://user-images.githubusercontent.com/73554031/112509635-a6370d00-8d5e-11eb-8919-96e7a11882a1.png)
 
 ## Prerequisites
