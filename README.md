@@ -19,6 +19,8 @@ This app serves as a database to keep track of all of your discs.  When you leav
 ![add-disc](https://user-images.githubusercontent.com/73554031/112509596-9fa89580-8d5e-11eb-86d6-76a9355ad77e.png)
 ### Inventory
 ![inventory-discs](https://user-images.githubusercontent.com/73554031/112509608-a20aef80-8d5e-11eb-9143-560631270013.png)
+### Disc Details
+![disc-details](https://user-images.githubusercontent.com/73554031/112510035-0b8afe00-8d5f-11eb-9df7-436514617323.png)
 ### Suggest Disc
 ![suggestion-disc](https://user-images.githubusercontent.com/73554031/112509627-a46d4980-8d5e-11eb-8d78-d491ed756953.png)
 ### Suggest Disc Results
