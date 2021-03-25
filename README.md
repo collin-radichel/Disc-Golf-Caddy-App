@@ -13,10 +13,6 @@ This app serves as a database to keep track of all of your discs.  When you leav
 
 ## Screenshots
 
-### Login
-![disc-login](https://user-images.githubusercontent.com/73554031/112509581-9d463b80-8d5e-11eb-9512-0e728b6deb97.png)
-### Add Disc
-![add-disc](https://user-images.githubusercontent.com/73554031/112509596-9fa89580-8d5e-11eb-86d6-76a9355ad77e.png)
 ### Inventory
 ![inventory-discs](https://user-images.githubusercontent.com/73554031/112509608-a20aef80-8d5e-11eb-9143-560631270013.png)
 ### Disc Details
